@@ -1,0 +1,32 @@
+name = "showtracker-api"
+main = "backend/main.py"
+compatibility_date = "2024-12-01"
+
+# Required for Python Workers
+[build]
+command = ""
+
+[vars]
+ENVIRONMENT = "production"
+
+# D1 Database Binding
+# Create database first: wrangler d1 create showtracker-db
+# Then replace YOUR_DATABASE_ID with the actual ID
+[[d1_databases]]
+binding = "DB"
+database_name = "showtracker-db"
+database_id = "YOUR_DATABASE_ID"
+
+# Development environment
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[[env.development.d1_databases]]
+binding = "DB"
+database_name = "showtracker-db"
+database_id = "YOUR_DATABASE_ID"
+
+# KV for caching (optional - create with: wrangler kv:namespace create CACHE)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "YOUR_KV_ID"
